@@ -3,119 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>My Portfolio</title>
+    <title>AK - Cybersecurity Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="10" y="20" font-size="10" fill="rgba(0,255,0,0.1)">01010101</text><text x="10" y="40" font-size="10" fill="rgba(0,255,0,0.1)">10101010</text><text x="10" y="60" font-size="10" fill="rgba(0,255,0,0.1)">01010101</text><text x="10" y="80" font-size="10" fill="rgba(0,255,0,0.1)">10101010</text></svg>');
+            color: #00ff00;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                0deg,
+                transparent 24%,
+                rgba(0, 255, 0, 0.05) 25%,
+                rgba(0, 255, 0, 0.05) 26%,
+                transparent 27%,
+                transparent 74%,
+                rgba(0, 255, 0, 0.05) 75%,
+                rgba(0, 255, 0, 0.05) 76%,
+                transparent 77%,
+                transparent
+            );
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlines 8s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 2rem 0;
+            border-bottom: 3px solid #00ff00;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00ff00; }
+            50% { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        nav a:hover {
+            color: #00cc00;
+            text-shadow: 0 0 15px #00ff00;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff00;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            animation: slideDown 0.8s ease;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: #00cc00;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease 0.2s backwards;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 40px;
+            background: transparent;
+            color: #00ff00;
+            text-decoration: none;
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease 0.4s backwards;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .cta-button:hover {
+            background: #00ff00;
+            color: #0a0e27;
+            text-shadow: none;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        section {
+            padding: 5rem 2rem;
+            margin: 2rem 0;
+            background: rgba(10, 14, 39, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 15px #00ff00;
+            letter-spacing: 2px;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #00ff00;
+            margin: 1rem auto 0;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border: 3px solid #00ff00;
+            border-radius: 0px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: matrixPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes matrixPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 0, 0.8); }
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(1.1);
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #00cc00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 255, 0, 0.05);
+            padding: 2rem;
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease forwards;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+        }
+
+        .skill-card h3 {
+            font-size: 1.3em;
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .skill-card p {
+            color: #00cc00;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .project-card:hover::before {
+            left: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+        }
+
+        .project-card h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            font-size: 1.3em;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .project-card p {
+            color: #00cc00;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card a {
+            display: inline-block;
+            padding: 8px 20px;
+            background: transparent;
+            color: #00ff00;
+            text-decoration: none;
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .project-card a:hover {
+            background: #00ff00;
+            color: #0a0e27;
+            box-shadow: 0 0 20px #00ff00;
+            transform: translateX(5px);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px 15px;
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #00aa00;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            padding: 12px 30px;
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 0px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .contact-form button:hover {
+            background: #00ff00;
+            color: #0a0e27;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        footer {
+            background: rgba(10, 14, 39, 0.95);
+            text-align: center;
+            padding: 2rem;
+            border-top: 3px solid #00ff00;
+            margin-top: 4rem;
+            color: #00cc00;
+            text-shadow: 0 0 10px #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 1.5rem; }
+            nav ul { flex-direction: column; gap: 1rem; text-align: center; }
+            .hero h1 { font-size: 2.5em; }
+            section h2 { font-size: 1.8em; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .about-container { flex-direction: column; }
+            .profile-image { width: 200px; height: 200px; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Aykhan Suleymanli</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">> AK</div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </header>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm Aykhan Suleymanli, a passionate web developer with a love for creating beautiful and functional websites.</p>
-    </section>
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-        </ul>
-    </section>
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project 1</h3>
-            <p>Description of project 1.</p>
-            <a href="#">View Project</a>
-        </div>
-        <div class="project">
-            <h3>Project 2</h3>
-            <p>Description of project 2.</p>
-            <a href="#">View Project</a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>> CYBERSECURITY EXPERT</h1>
+            <p>Network Security | Penetration Testing | Ethical Hacking</p>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">$ Access Contact</button>
         </div>
     </section>
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form action="#" method="post">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message"></textarea><br>
-            <button type="submit">Send</button>
+
+    <section id="about" class="container">
+        <h2>> About Me</h2>
+        <div class="about-container">
+            <div class="profile-image">
+                <img src="https://via.placeholder.com/250x250?text=AK+Profile" alt="AK Profile">
+            </div>
+            <div class="about-text">
+                <p>Salam! Mən Aykhan Suleymanli, kibertəhlükəsizlik mütəxəssisiyəm. Şəbəkə təhlükəsizliyi, penetrasyon tətbiqi və etik hakerlə məşğul oluram. Kompüter sistemlərinin keçidini kəşf etməyi sevən bir çox layihəyə sahibəm.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2>> Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Network Security</h3>
+                <p>Advanced firewall configuration</p>
+            </div>
+            <div class="skill-card">
+                <h3>Penetration Testing</h3>
+                <p>Ethical hacking & vulnerability assessment</p>
+            </div>
+            <div class="skill-card">
+                <h3>Cryptography</h3>
+                <p>Encryption & data protection</p>
+            </div>
+            <div class="skill-card">
+                <h3>Malware Analysis</h3>
+                <p>Threat detection & response</p>
+            </div>
+            <div class="skill-card">
+                <h3>Web Security</h3>
+                <p>Application security & OWASP</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2>> Security Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Network Vulnerability Scanner</h3>
+                <p>Custom-built tool for identifying network vulnerabilities and security gaps in enterprise environments.</p>
+                <a href="#">$ View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Intrusion Detection System</h3>
+                <p>AI-powered IDS for real-time threat detection and automated response to security incidents.</p>
+                <a href="#">$ View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Security Audit Framework</h3>
+                <p>Comprehensive security audit tool for compliance checking and risk assessment in organizations.</p>
+                <a href="#">$ View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>> Contact System</h2>
+        <form class="contact-form" id="contact-form">
+            <input type="text" id="name" placeholder="$ Enter your name" required>
+            <input type="email" id="email" placeholder="$ Enter your email" required>
+            <textarea id="message" placeholder="$ Write your message..." required></textarea>
+            <button type="submit">$ Send Message</button>
         </form>
     </section>
+
     <footer>
-        <p>&copy; 2026 Aykhan Suleymanli</p>
+        <p>© 2026 AK Security. Access Granted.</p>
     </footer>
-    <script src="script.js"></script>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || !message) {
+                alert('> ERROR: Please fill in all fields.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^"]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('> ERROR: Invalid email format.');
+                return;
+            }
+
+            alert('> SUCCESS: Message transmitted successfully!');
+            form.reset();
+        });
+    </script>
 </body>
 </html>
-
-/* styles.css */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #ffffff;
-}
-
-header {
-    background: #1e1e1e;
-    padding: 20px;
-    text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-section {
-    padding: 20px;
-    margin: 20px 0;
-    background-color: #1e1e1e;
-}
-
-.project {
-    margin: 10px 0;
-}
-
-footer {
-    text-align: center;
-    background: #1e1e1e;
-    padding: 10px;
-}
-
-/* script.js */
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('Message sent!');
-});
